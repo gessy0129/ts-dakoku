@@ -155,6 +155,7 @@ func (ctx *Context) createTimeTableClient() *timeTableClient {
 
 func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte, error) {
 	req, err := http.NewRequest(method, client.Endpoint, data)
+	fmt.Printf("%v %v %v\n", method, client.Endpoint, data)
 	if err != nil {
 		return nil, err
 	}
