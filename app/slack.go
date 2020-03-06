@@ -57,10 +57,11 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 	}
 
 	var ok bool
+	client2 := ctx.createTimeTableClient()
 	if attendance != -1 {
-		ok, err = client.SetAttendance(attendance == 1)
+		ok, err = client2.SetAttendance(attendance == 1)
 	} else {
-		ok, err = client.UpdateTimeTable(timeTable)
+		ok, err = client2.UpdateTimeTable(timeTable)
 	}
         fmt.Printf("%v \n", ok)
 	if !ok || err != nil {
