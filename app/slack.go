@@ -21,17 +21,7 @@ const (
 func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*slack.Msg, string, error) {
 	ctx.UserID = data.User.ID
 	client := ctx.createTimeTableClient()
-	timeTable, err := client.GetTimeTable()
         fmt.Printf("line 55\n")
-	if err != nil {
-		state := State{
-			TeamID:      data.Team.ID,
-			UserID:      ctx.UserID,
-			ResponseURL: data.ResponseURL,
-		}
-		err, msg := ctx.getLoginSlackMessage(state)
-		return err, data.ResponseURL, msg
-	}
 
 	text := ""
 	now := time.Now()
@@ -44,11 +34,13 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 		}
 	case actionTypeRest:
 		{
+			timeTable, err := client.GetTimeTable()
 			timeTable.Rest(now)
 			text = "休憩を開始しました :coffee:"
 		}
 	case actionTypeUnrest:
 		{
+			timeTable, err := client.GetTimeTable()
 			timeTable.Unrest(now)
 			text = "休憩を終了しました :computer:"
 		}
