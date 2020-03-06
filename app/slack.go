@@ -21,6 +21,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 	ctx.UserID = data.User.ID
 	client := ctx.createTimeTableClient()
 	timeTable, err := client.GetTimeTable()
+        fmt.Printf("line 55\n")
 	if err != nil {
 		state := State{
 			TeamID:      data.Team.ID,
@@ -37,7 +38,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 	switch data.Actions[0].Name {
 	case actionTypeLeave:
 		{
-			attendance = 1
+			attendance = 0
 			text = "退勤しました :house:"
 		}
 	case actionTypeRest:
@@ -52,7 +53,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 		}
 	case actionTypeAttend:
 		{
-			attendance = 0
+			attendance = 1
 			text = "出勤しました :office:"
 		}
 	}
@@ -167,6 +168,7 @@ func (ctx *Context) getSlackMessage(command slack.SlashCommand) (*slack.Msg, err
 		return ctx.getLoginSlackMessage(state)
 	}
 	timeTable, err := client.GetTimeTable()
+        fmt.Printf("line 65\n")
 	if err != nil {
 		return ctx.getLoginSlackMessage(state)
 	}
