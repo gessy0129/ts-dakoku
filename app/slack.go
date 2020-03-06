@@ -37,7 +37,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 	switch data.Actions[0].Name {
 	case actionTypeLeave:
 		{
-			attendance = 0
+			attendance = 1
 			text = "退勤しました :house:"
 		}
 	case actionTypeRest:
@@ -52,7 +52,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 		}
 	case actionTypeAttend:
 		{
-			attendance = 1
+			attendance = 0
 			text = "出勤しました :office:"
 		}
 	}
@@ -72,8 +72,7 @@ func (ctx *Context) getActionCallback(data *slack.AttachmentActionCallback) (*sl
 	if !ok || err != nil {
 		params.ResponseType = "ephemeral"
 		params.ReplaceOriginal = false
-		//params.Text = "勤務表の更新に失敗しました :warning:"
-		params.Text = text
+		params.Text = "勤務表の更新に失敗しました :warning:"
 	}
 
 	return params, data.ResponseURL, nil
