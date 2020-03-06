@@ -199,6 +199,7 @@ func (client *timeTableClient) SetAttendance(attendance bool) (bool, error) {
 		return false, err
 	}
 	body, err := client.doRequest(http.MethodPut, bytes.NewBuffer(b))
+        fmt.Printf("%v \n", attendance)
 	fmt.Printf("%v %v %v\n", string(body), err, string(body) == `"OK"`)
 	if err != nil {
 		return false, err
