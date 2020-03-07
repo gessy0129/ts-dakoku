@@ -164,6 +164,10 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 		req.Header.Set("Content-Type", "application/json")
 	}
 	dumpb, err2 := httputil.DumpRequest(req, false)
+	if err2 != nil {
+		fmt.Println(string(err2))
+	}
+
 	fmt.Println(string(dumpb))
 	res, err := client.HTTPClient.Do(req)
 	if err != nil {
