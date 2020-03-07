@@ -177,7 +177,8 @@ func (ctx *Context) getSlackMessage(command slack.SlashCommand) (*slack.Msg, err
 			Text: "既に退勤済です。打刻修正は <https://" + ctx.TeamSpiritHost + "|TeamSpirit> で行なってください。",
 		}, nil
 	}
-	if timeTable.IsHoliday != nil && *timeTable.IsHoliday == true {
+	// if timeTable.IsHoliday != nil && *timeTable.IsHoliday == true {
+	if timeTable.IsHoliday != nil && *timeTable.IsHoliday == false {
 		return &slack.Msg{
 			Text: "本日は休日です :sunny:",
 		}, nil
