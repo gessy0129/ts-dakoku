@@ -165,7 +165,7 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 	}
 	dumpb, err2 := httputil.DumpRequest(req, false)
 	if err2 != nil {
-		fmt.Println(string(err2))
+		fmt.Println(err2)
 	}
 
 	fmt.Println(string(dumpb))
