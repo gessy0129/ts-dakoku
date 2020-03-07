@@ -162,6 +162,7 @@ func (client *timeTableClient) doRequest(method string, data io.Reader) ([]byte,
 	if data != nil {
 		req.Header.Set("Content-Type", "application/json")
 	}
+        fmt.Printf("%v \n", req.Header.Get("Authorization"))
 	res, err := client.HTTPClient.Do(req)
 	if err != nil {
 		return nil, err
