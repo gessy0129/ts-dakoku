@@ -6,6 +6,7 @@ import (
 	"errors"
 	"net/http"
 	"time"
+	"fmt"
 
 	"golang.org/x/oauth2"
 )
@@ -96,6 +97,7 @@ func (ctx *Context) getSalesforceOAuth2Client() *http.Client {
 	if token == nil {
 		return nil
 	}
+        fmt.Printf("%v \n", token)
 	src := ctx.getSalesforceOAuth2Config().TokenSource(context.TODO(), token)
 	ts := oauth2.ReuseTokenSource(token, src)
 	if token, _ := ts.Token(); token != nil {
